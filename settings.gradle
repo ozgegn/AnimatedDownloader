@@ -1,0 +1,2 @@
+rootProject.name = "AnimatedDownloader"
+include ':app'
