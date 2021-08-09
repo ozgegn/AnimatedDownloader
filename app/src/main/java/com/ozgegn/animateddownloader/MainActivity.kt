@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NotificationCompat
@@ -61,7 +62,6 @@ class MainActivity : AppCompatActivity() {
 
         loadingButton.setOnClickListener {
             onDownloadClicked()
-            loadingButton.startLoading()
         }
 
         createChannel(
@@ -80,7 +80,9 @@ class MainActivity : AppCompatActivity() {
                 val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
                 val cursor = downloadManager.query(query)
                 if (cursor.moveToFirst()) {
-                    sendNotification()
+                    val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                    val isSuccess = status == DownloadManager.STATUS_SUCCESSFUL
+                    sendNotification(isSuccess, selectedDownloadOption?.body ?: R.string.download_default_message)
                 }
             }
         }
@@ -115,13 +117,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun sendNotification() {
+    private fun sendNotification(result: Boolean, @StringRes message: Int) {
         selectedDownloadOption?.let {
             val notificationManager =
                 getSystemService(NotificationManager::class.java) as NotificationManager
             notificationManager.cancelAll()
             notificationManager.sendNotification(
-                getString(it.body),
+                result,
+                getString(message),
                 this
             )
         }
@@ -130,14 +133,17 @@ class MainActivity : AppCompatActivity() {
     private fun onDownloadClicked() {
         when (downloadList.checkedRadioButtonId) {
             radioGlide.id -> {
+                loadingButton.startLoading()
                 selectedDownloadOption = DownLoadOptions.GLIDE
                 download(DownLoadOptions.GLIDE.url)
             }
             radioLoadApp.id -> {
+                loadingButton.startLoading()
                 selectedDownloadOption = DownLoadOptions.UDACITY
                 download(DownLoadOptions.UDACITY.url)
             }
             radioRetrofit.id -> {
+                loadingButton.startLoading()
                 selectedDownloadOption = DownLoadOptions.RETROFIT
                 download(DownLoadOptions.RETROFIT.url)
             }

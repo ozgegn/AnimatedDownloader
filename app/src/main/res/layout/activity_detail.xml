@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/detail_motion_scene">
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/left_barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="detail_file_name_label, detail_file_status_label" />
+
+    <TextView
+        android:id="@+id/detail_file_name_label"
+        style="@style/TextLabelStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        android:text="@string/detail_file_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/detail_file_name"
+        style="@style/TextDetailStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_barrier"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@string/detail_file_name" />
+
+    <TextView
+        android:id="@+id/detail_file_status_label"
+        style="@style/TextLabelStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        android:text="@string/detail_status"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detail_file_name_label" />
+
+    <TextView
+        android:id="@+id/detail_file_status"
+        style="@style/TextDetailStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/detail_padding"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/left_barrier"
+        app:layout_constraintTop_toBottomOf="@id/detail_file_name"
+        tools:text="@string/detail_status" />
+
+    <Button
+        android:id="@+id/detail_ok"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/button_margin"
+        android:background="@android:color/holo_orange_light"
+        android:text="@string/detail_ok"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_baseline_assignment_returned_24" />
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

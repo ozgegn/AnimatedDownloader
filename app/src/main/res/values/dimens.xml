@@ -2,4 +2,5 @@
 <resources>
     <dimen name="button_margin">16dp</dimen>
     <dimen name="button_height">60dp</dimen>
+    <dimen name="detail_padding">16dp</dimen>
 </resources>
